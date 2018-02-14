@@ -19,25 +19,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String API_BASE_URL = "https://api.github.com/";
 
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
-        Retrofit.Builder builder =
-                new Retrofit.Builder()
-                        .baseUrl(API_BASE_URL)
-                        .addConverterFactory(
-                                GsonConverterFactory.create()
-                        );
-
-        Retrofit retrofit =
-                builder
-                        .client(
-                                httpClient.build()
-                        )
-                        .build();
-
-        GitHubClient client =  retrofit.create(GitHubClient.class);
+        GitHubClient client =  ServiceGenerator.createService(GitHubClient.class);
 
         // Fetch a list of the Github repositories.
         Call<List<GitHubRepo>> call = client.reposForUser("fs-opensource");
