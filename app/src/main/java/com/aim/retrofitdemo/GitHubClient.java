@@ -12,9 +12,11 @@ import retrofit2.http.Path;
 
 public interface GitHubClient {
 
-    @GET("/users/{user}/repos")
+    @GET("/repos/{owner}/{repo}/contributors")
     Call<List<GitHubRepo>> reposForUser(
-            @Path("user") String user
+            @Path("owner") String owner,
+             @Path("repo") String repo
+
     );
 
 

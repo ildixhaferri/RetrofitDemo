@@ -1,9 +1,10 @@
 package com.aim.retrofitdemo;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
+import com.squareup.okhttp.OkHttpClient;
+
+import retrofit.RestAdapter;
+import retrofit.client.OkClient;
 
 /**
  * Created by Ildi on 2/14/2018.
@@ -11,9 +12,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
 
-    private static final String BASE_URL = "https://api.github.com/";
 
+    private static final String BASE_URL = "https://developer.github.com/v3/";
 
+    /* version 2
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -30,6 +32,14 @@ public class ServiceGenerator {
     public static <S> S createService(
             Class<S> serviceClass) {
         return retrofit.create(serviceClass);
+    } */
+
+    private static RestAdapter.Builder builder = new RestAdapter.Builder().setEndpoint(BASE_URL)
+                                                                            .setClient(new OkClient(new OkHttpClient()));
+
+    public static <S> S createService(Class<S> serviceClass){
+        RestAdapter adapter = builder.build();
+        return adapter.create(serviceClass);
     }
 
 

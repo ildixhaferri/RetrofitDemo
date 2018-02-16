@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        /*
 
         GitHubClient client =  ServiceGenerator.createService(GitHubClient.class);
 
@@ -40,5 +40,13 @@ public class MainActivity extends AppCompatActivity {
                 // TODO: handle error
             }
         });
+        */
+
+
+        String API_URL = "https://developer.github.com/v3/";
+
+        GitHubClient client = ServiceGenerator.createService(GitHubClient.class, API_URL);
+
+
     }
 }
